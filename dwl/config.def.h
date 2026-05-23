@@ -29,6 +29,7 @@ static uint32_t colors[][3]                = {
 
 /* tagging */
 static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+#define TAGCOUNT (sizeof tags / sizeof tags[0])
 
 /* logging */
 static int log_level = WLR_ERROR;
