@@ -1,1 +1,1 @@
-![My minimal DWL config, nothing crazy tbh, very subject to change](images/image.png)
+<img src="images/image.png" alt="Testing" width="400">
