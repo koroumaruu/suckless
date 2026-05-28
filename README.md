@@ -1,1 +1,1 @@
-<img src="images/image.png" alt="Testing" width="400">
+"Look at somebar's instructions for lib depends: https://git.sr.ht/~raphi/somebar"
