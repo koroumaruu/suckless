@@ -27,6 +27,7 @@ static uint32_t colors[][3]                = {
 	[SchemeUrg]  = { 0,          0,          0x770000ff },
 };
 
+#define SCRATCHPAD_COUNT 3
 /* tagging */
 static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 #define TAGCOUNT (sizeof tags / sizeof tags[0])
@@ -171,6 +172,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} },
 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_c,           killclient,       {0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_z,           addscratchpad,    {0} },
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_z,           togglescratchpad, {0} },
+	{ MODKEY,                    XKB_KEY_z,           removescratchpad, {0} },
 	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
 	{ MODKEY,                    XKB_KEY_f,           setlayout,        {.v = &layouts[1]} },
 	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} },
@@ -183,6 +187,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,        tagmon,           {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,     tagmon,           {.i = WLR_DIRECTION_RIGHT} },
+	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_1,           setscratchpad,    {.i = 0} },
+	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_2,           setscratchpad,    {.i = 1} },
+	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_3,           setscratchpad,    {.i = 2} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                        0),
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                            1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                    2),

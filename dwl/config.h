@@ -24,10 +24,11 @@ static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You ca
 static uint32_t colors[][3]                = {
 	/*               fg          bg          border    */
 	[SchemeNorm] = { 0xbbbbbbff, 0x000000ff, 0x111111ff },
-	[SchemeSel]  = { 0xeeeeeeff, 0x121212ff, 0x555555ff },
+	[SchemeSel]  = { 0xeeeeeeff, 0x121212ff, 0x666666ff },
 	[SchemeUrg]  = { 0,          0,          0x770000ff },
 };
 
+#define SCRATCHPAD_COUNT 3
 /* tagging */
 static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 #define TAGCOUNT (sizeof tags / sizeof tags[0])
@@ -138,6 +139,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
+static const char *browser[] = { "helium", NULL };
+static const char *wallpaper[] = { "waypaper", NULL };
 static const char *menucmd[] = { "rofi", "-show", "drun", NULL };
 static const char *cropcmd[] = { "grimshot", "copy", "area", NULL };
 static const char *screencmd[] = { "grimshot", "copy", "output", "--notify", NULL };
@@ -153,6 +156,8 @@ static const Key keys[] = {
 	/* modifier                  key                  function          argument */
 	//spawn commands (rofi, terminal, screenshot, etc)
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
+	{ MODKEY,                    XKB_KEY_r,           spawn,            {.v = browser} },
+	{ MODKEY,                    XKB_KEY_y,           spawn,            {.v = wallpaper} },
 	{ MODKEY,		     XKB_KEY_Return,      spawn,            {.v = termcmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_s,           spawn,            {.v = cropcmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_d,           spawn,            {.v = screencmd} },
@@ -175,6 +180,15 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} },
 	/*{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,       togglefloating,   {0} },*/
 	{ MODKEY,                    XKB_KEY_f,           togglefullscreen, {0} },
+
+
+	//scratchpad
+	/*{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_z,           addscratchpad,    {0} },*/
+	/*{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_z,           togglescratchpad, {0} },*/
+	/*{ MODKEY,                    XKB_KEY_z,           removescratchpad, {0} },*/
+	/*{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_1,           setscratchpad,    {.i = 0} },*/
+	/*{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_2,           setscratchpad,    {.i = 1} },*/
+	/*{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_3,           setscratchpad,    {.i = 2} },*/
 
 	//media keys
 	{ 0,                   XF86XK_AudioRaiseVolume, spawn,          {.v = upvol} },

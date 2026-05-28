@@ -1,22 +1,10 @@
 --- dwl.c
 +++ dwl.c
-@@ -200,6 +201,7 @@ struct Monitor {
- 	struct wlr_box w; /* window area, layout-relative */
- 	struct wl_list layers[4]; /* LayerSurface.link */
- 	const Layout *lt[2];
-+	Pertag *pertag;
- 	unsigned int seltags;
- 	unsigned int sellt;
- 	uint32_t tagset[2];
-@@ -2327,9 +2350,9 @@ setlayout(const Arg *arg)
- 	if (!selmon)
- 		return;
- 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
--		selmon->sellt ^= 1;
-+		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
- 	if (arg && arg->v)
--		selmon->lt[selmon->sellt] = (Layout *)arg->v;
-+		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
- 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, LENGTH(selmon->ltsymbol));
- 	arrange(selmon);
- 	printstatus();
+@@ -340,6 +344,7 @@ static void tagmon(const Arg *arg);
+ static void tile(Monitor *m);
+ static void togglefloating(const Arg *arg);
+ static void togglefullscreen(const Arg *arg);
++static void togglescratchpad(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+ static void unlocksession(struct wl_listener *listener, void *data);
